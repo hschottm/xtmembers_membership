@@ -71,6 +71,7 @@ $GLOBALS['TL_DCA']['tl_member_fees'] = array
 		'ptable'                      => 'tl_member',
 		'ctable'                      => array(),
 		'switchToEdit'                => false,
+		'closed'                      => true,
 		'enableVersioning'            => true,
 		'onload_callback' => array
 		(
@@ -104,6 +105,13 @@ $GLOBALS['TL_DCA']['tl_member_fees'] = array
 		),
 		'global_operations' => array
 		(
+			'all' => array
+				(
+					'label'               => &$GLOBALS['TL_LANG']['MSC']['all'],
+					'href'                => 'act=select',
+					'class'               => 'header_edit_all',
+					'attributes'          => 'onclick="Backend.getScrollOffset();"'
+				)
 		),
 		'operations' => array
 		(
@@ -125,7 +133,7 @@ $GLOBALS['TL_DCA']['tl_member_fees'] = array
 	// Palettes
 	'palettes' => array
 	(
-		'default'                     => 'year,fee,status'
+		'default'                     => 'year,status,fee,payed'
 	),
 
 	// Fields
@@ -159,6 +167,16 @@ $GLOBALS['TL_DCA']['tl_member_fees'] = array
 		'fee' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_member_fees']['fee'],
+			'search'                  => true,
+			'sorting'                 => true,
+			'inputType'               => 'text',
+			'load_callback'           => array(array('tl_member_fees', 'formatCurrency')),
+			'eval'                    => array('tl_class' => 'w50','rgxp' => 'currency', 'mandatory' => true),
+			'sql'                     => "varchar(32) NOT NULL default '0'"
+		),
+		'payed' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_member_fees']['already_payed'],
 			'search'                  => true,
 			'sorting'                 => true,
 			'inputType'               => 'text',

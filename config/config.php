@@ -12,4 +12,7 @@ $GLOBALS['TL_HOOKS']['addCustomRegexp'][] = array('Membership', 'customRgxpCurre
 
 array_insert($GLOBALS['BE_MOD']['accounts']['member']['tables'], 1, 'tl_member_fees');
 
+$GLOBALS['BE_MOD']['accounts']['member']['stylesheet'] = 'system/modules/xtmembers_membership/assets/membership.css';
+$GLOBALS['BE_MOD']['accounts']['member']['export_xls'] = array('Membership', 'exportXls');
+
 ?>

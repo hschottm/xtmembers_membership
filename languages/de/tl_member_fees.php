@@ -14,6 +14,7 @@
  */
 $GLOBALS['TL_LANG']['tl_member_fees']['year']      = array('Jahr', 'Jahr der Mitgliedschaft');
 $GLOBALS['TL_LANG']['tl_member_fees']['fee']    = array('Beitrag', 'Jahresbeitrag der Mitgliedschaft für das aktuelle Jahr');
+$GLOBALS['TL_LANG']['tl_member_fees']['already_payed']    = array('Bezahlt', 'Bezahlter Beitrag für das aktuelle Jahr');
 $GLOBALS['TL_LANG']['tl_member_fees']['status']    = array('Status', 'Status der Beitragszahlung für das aktuelle Jahr');
 $GLOBALS['TL_LANG']['tl_member_fees']['show']   = array('Details', 'Details der Beitragszahlung für die Mitgliedschaft ID %s anzeigen');
 $GLOBALS['TL_LANG']['tl_member_fees']['edit']   = array('Beitragszahlung bearbeiten', 'Beitragszahlung mit der ID %s für die Mitgliedschaft bearbeiten');
@@ -21,5 +22,6 @@ $GLOBALS['TL_LANG']['tl_member_fees']['payed']   = 'bezahlt';
 $GLOBALS['TL_LANG']['tl_member_fees']['postponed']   = 'gestundet';
 $GLOBALS['TL_LANG']['tl_member_fees']['freed']   = 'befreit';
 $GLOBALS['TL_LANG']['tl_member_fees']['outstanding']   = 'offen';
+$GLOBALS['TL_LANG']['tl_member_fees']['fees']   = 'Beiträge';
 
 ?>

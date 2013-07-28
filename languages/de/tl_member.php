@@ -16,6 +16,7 @@ $GLOBALS['TL_LANG']['tl_member']['membership_fee']      = array('Beitrag', 'Gebe
 $GLOBALS['TL_LANG']['tl_member']['membership_since']    = array('Mitglied seit', 'Geben Sie das Datum an, seit dem eine Vereinsmitgliedschaft besteht');
 $GLOBALS['TL_LANG']['tl_member']['membership_until']    = array('Mitglied bis', 'Geben Sie das Datum an, bis zu dem eine Vereinsmitgliedschaft bestand');
 $GLOBALS['TL_LANG']['tl_member']['membership_fees']     = array('Mitgliedsbeiträge', 'Detaillierte Statistik über die Mitgliedsbeiträge');
+$GLOBALS['TL_LANG']['tl_member']['export_xls']          = array('Beiträge exportieren', 'Export aller Beitragszahlungen als Excel-Datei');
 
 /**
  * Legends

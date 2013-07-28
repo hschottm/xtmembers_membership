@@ -36,6 +36,79 @@ class Membership extends Backend
 		return false;
 	}
 
+	public function exportXls()
+	{
+		if (\Input::get('key') != 'export_xls')
+		{
+			$this->redirect(str_replace('&key=export_xls', '', \Environment::get('request')));
+		}
+		
+		$this->loadLanguageFile('tl_member_fees');
+		$this->loadLanguageFile('tl_member');
+		$arrFees = $this->Database->prepare("SELECT tl_member_fees.*, tl_member.firstname, tl_member.lastname, tl_member.street, tl_member.postal, tl_member.city FROM tl_member_fees, tl_member WHERE tl_member_fees.pid = tl_member.id ORDER BY tl_member.lastname ASC, tl_member.firstname ASC, tl_member_fees.year DESC")
+			->execute();
+		if ($arrFees->numRows)
+		{
+			$xls = new \xlsexport();
+			$sheet = utf8_decode($GLOBALS['TL_LANG']['tl_member_fees']['fees']);
+			$xls->addworksheet($sheet);
+			$row = 0;
+			$col = 0;
+			$xls->setcell(array("sheetname" => $sheet,"row" => $row, "col" => $col, "data" => utf8_decode($GLOBALS['TL_LANG']['tl_member']['lastname'][0]), "bgcolor" => "#C0C0C0", "color" => "#000000", "fontweight" => XLSFONT_BOLD));
+			$col++;
+			$xls->setcell(array("sheetname" => $sheet,"row" => $row, "col" => $col, "data" => utf8_decode($GLOBALS['TL_LANG']['tl_member']['firstname'][0]), "bgcolor" => "#C0C0C0", "color" => "#000000", "fontweight" => XLSFONT_BOLD));
+			$col++;
+			$xls->setcell(array("sheetname" => $sheet,"row" => $row, "col" => $col, "data" => utf8_decode($GLOBALS['TL_LANG']['tl_member']['street'][0]), "bgcolor" => "#C0C0C0", "color" => "#000000", "fontweight" => XLSFONT_BOLD));
+			$col++;
+			$xls->setcell(array("sheetname" => $sheet,"row" => $row, "col" => $col, "data" => utf8_decode($GLOBALS['TL_LANG']['tl_member']['postal'][0]), "bgcolor" => "#C0C0C0", "color" => "#000000", "fontweight" => XLSFONT_BOLD));
+			$col++;
+			$xls->setcell(array("sheetname" => $sheet,"row" => $row, "col" => $col, "data" => utf8_decode($GLOBALS['TL_LANG']['tl_member']['city'][0]), "bgcolor" => "#C0C0C0", "color" => "#000000", "fontweight" => XLSFONT_BOLD));
+			$col++;
+			$xls->setcell(array("sheetname" => $sheet,"row" => $row, "col" => $col, "data" => utf8_decode($GLOBALS['TL_LANG']['tl_member_fees']['year'][0]), "bgcolor" => "#C0C0C0", "color" => "#000000", "fontweight" => XLSFONT_BOLD));
+			$col++;
+			$xls->setcell(array("sheetname" => $sheet,"row" => $row, "col" => $col, "data" => utf8_decode($GLOBALS['TL_LANG']['tl_member_fees']['fee'][0]), "bgcolor" => "#C0C0C0", "color" => "#000000", "fontweight" => XLSFONT_BOLD));
+			$col++;
+			$xls->setcell(array("sheetname" => $sheet,"row" => $row, "col" => $col, "data" => utf8_decode($GLOBALS['TL_LANG']['tl_member_fees']['already_payed'][0]), "bgcolor" => "#C0C0C0", "color" => "#000000", "fontweight" => XLSFONT_BOLD));
+			$col++;
+			$xls->setcell(array("sheetname" => $sheet,"row" => $row, "col" => $col, "data" => utf8_decode($GLOBALS['TL_LANG']['tl_member_fees']['status'][0]), "bgcolor" => "#C0C0C0", "color" => "#000000", "fontweight" => XLSFONT_BOLD));
+			$col++;
+
+			while ($arrFees->next())
+			{
+				$row++;
+				$data = $arrFees->row();
+				$col = 0;
+				$xls->setcell(array("sheetname" => $sheet,"row" => $row, "col" => $col, "data" => utf8_decode($data['lastname'])));
+				$col++;
+				$xls->setcell(array("sheetname" => $sheet,"row" => $row, "col" => $col, "data" => utf8_decode($data['firstname'])));
+				$col++;
+				$xls->setcell(array("sheetname" => $sheet,"row" => $row, "col" => $col, "data" => utf8_decode($data['street'])));
+				$col++;
+				$xls->setcell(array("sheetname" => $sheet,"row" => $row, "col" => $col, "data" => utf8_decode($data['postal'])));
+				$col++;
+				$xls->setcell(array("sheetname" => $sheet,"row" => $row, "col" => $col, "data" => utf8_decode($data['city'])));
+				$col++;
+				$xls->setcell(array("sheetname" => $sheet,"row" => $row, "col" => $col, "data" => $data['year']));
+				$col++;
+				$xls->setcell(array("sheetname" => $sheet,"row" => $row, "col" => $col, "data" => $data['fee'], "type" => CELL_FLOAT));
+				$col++;
+				$xls->setcell(array("sheetname" => $sheet,"row" => $row, "col" => $col, "data" => $data['already_payed'], "type" => CELL_FLOAT));
+				$col++;
+				$xls->setcell(array("sheetname" => $sheet,"row" => $row, "col" => $col, "data" => utf8_decode($GLOBALS['TL_LANG']['tl_member_fees'][$data['status']])));
+			}
+
+			$xls->sendFile($this->safefilename(htmlspecialchars_decode($GLOBALS['TL_LANG']['tl_member_fees']['fees'])) . ".xls");
+			exit;
+		}
+		$this->redirect(\Environment::get('script') . '?do=' . \Input::get('do'));
+	}
+
+	protected function safefilename($filename) 
+	{
+		$search = array('/ß/','/ä/','/Ä/','/ö/','/Ö/','/ü/','/Ü/','([^[:alnum:]._])');
+		$replace = array('ss','ae','Ae','oe','Oe','ue','Ue','_');
+		return preg_replace($search,$replace,$filename);
+	}
 }
 
 ?>

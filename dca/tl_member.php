@@ -16,6 +16,16 @@ array_insert($GLOBALS['TL_DCA']['tl_member']['list']['operations'], 1, array(
 	)
 ));
 
+array_insert($GLOBALS['TL_DCA']['tl_member']['list']['global_operations'], 1, array(
+	'import' => array
+	(
+		'label'               => &$GLOBALS['TL_LANG']['tl_member']['export_xls'],
+		'href'                => 'key=export_xls',
+		'class'               => 'header_export_xls',
+		'attributes'          => 'onclick="Backend.getScrollOffset();"'
+	),
+));
+
 if (is_array($GLOBALS['TL_DCA']['tl_member']['config']['ctable']))
 {
 	array_push($GLOBALS['TL_DCA']['tl_member']['config']['ctable'], 'tl_member_fees');
