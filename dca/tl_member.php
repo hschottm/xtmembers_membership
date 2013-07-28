@@ -1,12 +1,10 @@
-<?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
+<?php
 
 /**
  * @copyright  Helmut Schottmüller 2013
  * @author     Helmut Schottmüller <https://github.com/hschottm/xtmembers_membership>
  * @package    Backend
  * @license    LGPL
- * @creator    xtmembers field editor, copyright 2009 aurealis, http://www.aurealis.de
- * @filesource
  */
 
 array_insert($GLOBALS['TL_DCA']['tl_member']['list']['operations'], 1, array(
@@ -14,7 +12,7 @@ array_insert($GLOBALS['TL_DCA']['tl_member']['list']['operations'], 1, array(
 	(
 		'label'               => &$GLOBALS['TL_LANG']['tl_member']['membership_fees'],
 		'href'                => 'table=tl_member_fees',
-		'icon'                => 'system/modules/xtmembers_membership/html/fees.png'
+		'icon'                => 'system/modules/xtmembers_membership/assets/fees.png'
 	)
 ));
 
@@ -37,7 +35,8 @@ $GLOBALS['TL_DCA']['tl_member']['fields']['membership_fee'] = array
 	'search'                  => true,
 	'inputType'               => 'text',
 	'load_callback'           => array(array('tl_member_membership', 'formatCurrency')),
-	'eval'                    => array('feEditable' => true,'feViewable' => true,'feGroup' => 'personal','tl_class' => 'w50','rgxp' => 'currency')
+	'eval'                    => array('feEditable' => true,'feViewable' => true,'feGroup' => 'personal','tl_class' => 'w50','rgxp' => 'currency'),
+	'sql'                     => "text NULL"
 );
 
 $GLOBALS['TL_DCA']['tl_member']['fields']['membership_since'] = array
@@ -46,7 +45,8 @@ $GLOBALS['TL_DCA']['tl_member']['fields']['membership_since'] = array
 	'exclude'                 => true,
 	'search'                  => true,
 	'inputType'               => 'text',
-	'eval'                    => array('feEditable' => true,'feViewable' => true,'feGroup' => 'personal','tl_class' => 'w50 wizard','datepicker' => true,'rgxp' => 'date')
+	'eval'                    => array('feEditable' => true,'feViewable' => true,'feGroup' => 'personal','tl_class' => 'w50 wizard','datepicker' => true,'rgxp' => 'date'),
+	'sql'                     => "text NULL"
 );
 
 $GLOBALS['TL_DCA']['tl_member']['fields']['membership_until'] = array
@@ -55,7 +55,8 @@ $GLOBALS['TL_DCA']['tl_member']['fields']['membership_until'] = array
 	'exclude'                 => true,
 	'search'                  => true,
 	'inputType'               => 'text',
-	'eval'                    => array('feEditable' => true,'feViewable' => true,'feGroup' => 'personal','tl_class' => 'w50 wizard','datepicker' => true,'rgxp' => 'date')
+	'eval'                    => array('feEditable' => true,'feViewable' => true,'feGroup' => 'personal','tl_class' => 'w50 wizard','datepicker' => true,'rgxp' => 'date'),
+	'sql'                     => "text NULL"
 );
 
 /**

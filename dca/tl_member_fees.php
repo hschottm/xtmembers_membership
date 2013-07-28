@@ -1,12 +1,10 @@
-<?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
+<?php
 
 /**
  * @copyright  Helmut Schottmüller 2013
  * @author     Helmut Schottmüller <https://github.com/hschottm/xtmembers_membership>
  * @package    Backend
  * @license    LGPL
- * @creator    xtmembers field editor, copyright 2009 aurealis, http://www.aurealis.de
- * @filesource
  */
 
 class tl_member_fees extends Backend
@@ -77,6 +75,14 @@ $GLOBALS['TL_DCA']['tl_member_fees'] = array
 		'onload_callback' => array
 		(
 			array('tl_member_fees', 'onLoad')
+		),
+		'sql' => array
+		(
+			'keys' => array
+			(
+				'id' => 'primary',
+				'pid' => 'index'
+			)
 		)
 	),
 
@@ -125,13 +131,30 @@ $GLOBALS['TL_DCA']['tl_member_fees'] = array
 	// Fields
 	'fields' => array
 	(
+		'id' => array
+		(
+			'sql'                     => "int(10) unsigned NOT NULL auto_increment"
+		),
+		'tstamp' => array
+		(
+			'sql'                     => "int(10) unsigned NOT NULL default '0'"
+		),
+		'pid' => array
+		(
+			'sql'                     => "int(10) unsigned NOT NULL default '0'"
+		),
+		'sorting' => array
+		(
+			'sql'                     => "int(10) unsigned NOT NULL default '0'"
+		),
 		'year' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_member_fees']['year'],
 			'search'                  => true,
 			'sorting'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'maxlength'=>4, 'rgxp' => 'digit', 'tl_class' => 'w50', 'readonly' => true)
+			'eval'                    => array('mandatory'=>true, 'maxlength'=>4, 'rgxp' => 'digit', 'tl_class' => 'w50', 'readonly' => true),
+			'sql'                     => "varchar(4) NOT NULL default ''"
 		),
 		'fee' => array
 		(
@@ -140,7 +163,8 @@ $GLOBALS['TL_DCA']['tl_member_fees'] = array
 			'sorting'                 => true,
 			'inputType'               => 'text',
 			'load_callback'           => array(array('tl_member_fees', 'formatCurrency')),
-			'eval'                    => array('tl_class' => 'w50','rgxp' => 'currency', 'mandatory' => true)
+			'eval'                    => array('tl_class' => 'w50','rgxp' => 'currency', 'mandatory' => true),
+			'sql'                     => "varchar(32) NOT NULL default '0'"
 		),
 		'status' => array
 		(
@@ -150,7 +174,8 @@ $GLOBALS['TL_DCA']['tl_member_fees'] = array
 			'inputType'               => 'select',
 			'options'                 => array('payed', 'postponed', 'freed'),
 			'reference'               => &$GLOBALS['TL_LANG']['tl_member_fees'],
-			'eval'                    => array('includeBlankOption'=>true, 'feEditable'=>true, 'feViewable'=>true, 'feGroup'=>'personal', 'tl_class'=>'w50')
+			'eval'                    => array('includeBlankOption'=>true, 'feEditable'=>true, 'feViewable'=>true, 'feGroup'=>'personal', 'tl_class'=>'w50'),
+			'sql'                     => "varchar(32) NOT NULL default ''"
 		),
 	)
 );
