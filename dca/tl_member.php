@@ -36,7 +36,7 @@ else
 }
 
 
-$GLOBALS['TL_DCA']['tl_member']['palettes']['default'] = str_replace('{groups_legend},','{legend_membership},membership_since,membership_until,membership_fee;{groups_legend}', $GLOBALS['TL_DCA']['tl_member']['palettes']['default']);
+$GLOBALS['TL_DCA']['tl_member']['palettes']['default'] = str_replace('{groups_legend},','{legend_membership},membership_since,membership_until,membership_fee;{groups_legend},', $GLOBALS['TL_DCA']['tl_member']['palettes']['default']);
 
 $GLOBALS['TL_DCA']['tl_member']['fields']['membership_fee'] = array
 (
