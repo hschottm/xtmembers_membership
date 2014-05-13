@@ -21,6 +21,6 @@ $GLOBALS['TL_LANG']['tl_member']['export_xls']          = array('Beiträge expor
 /**
  * Legends
  */
-$GLOBALS['TL_LANG']['tl_member']['legend_membership']   = 'Vereinswerwaltung';
+$GLOBALS['TL_LANG']['tl_member']['legend_membership']   = 'Vereinsverwaltung';
 
 ?>
