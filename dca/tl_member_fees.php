@@ -39,7 +39,8 @@ class tl_member_fees extends Backend
 			}
 			$arrYear = $this->Database->prepare("SELECT * FROM tl_member_fees WHERE pid = ? AND year = ?")
 				->execute($arrMember['id'], $yearuntil)->row();
-			if (!is_array($arrYear))
+
+			if (!is_array($arrYear) || count($arrYear) == 0)
 			{
 				$min = $yearfrom;
 				$minYear = $this->Database->prepare("SELECT MIN(year) minyear FROM tl_member_fees WHERE pid = ?")
@@ -48,7 +49,14 @@ class tl_member_fees extends Backend
 				{
 					$min = $minYear['minyear']+1;
 				}
-				for ($i = $min; $i <= $yearuntil; $i++)
+				$max = $min;
+				$maxYear = $this->Database->prepare("SELECT MAX(year) maxyear FROM tl_member_fees WHERE pid = ?")
+					->execute($arrMember['id'])->row();
+				if (is_array($maxYear) && strlen($maxYear['maxyear']))
+				{
+					$max = $maxYear['maxyear']+1;
+				}
+				for ($i = $max; $i <= $yearuntil; $i++)
 				{
 					$this->Database->prepare("INSERT INTO tl_member_fees (tstamp, pid, sorting, year, fee, status) VALUES (?, ?, ?, ?, ?, ?)")
 						->execute(time(), $arrMember['id'], $i, $i, $arrMember['membership_fee'], '');
