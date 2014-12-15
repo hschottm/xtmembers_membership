@@ -68,7 +68,7 @@ class Membership extends Backend
 			$col++;
 			$xls->setcell(array("sheetname" => $sheet,"row" => $row, "col" => $col, "data" => utf8_decode($GLOBALS['TL_LANG']['tl_member_fees']['fee'][0]), "bgcolor" => "#C0C0C0", "color" => "#000000", "fontweight" => XLSFONT_BOLD));
 			$col++;
-			$xls->setcell(array("sheetname" => $sheet,"row" => $row, "col" => $col, "data" => utf8_decode($GLOBALS['TL_LANG']['tl_member_fees']['already_payed'][0]), "bgcolor" => "#C0C0C0", "color" => "#000000", "fontweight" => XLSFONT_BOLD));
+			$xls->setcell(array("sheetname" => $sheet,"row" => $row, "col" => $col, "data" => utf8_decode($GLOBALS['TL_LANG']['tl_member_fees']['payed'][0]), "bgcolor" => "#C0C0C0", "color" => "#000000", "fontweight" => XLSFONT_BOLD));
 			$col++;
 			$xls->setcell(array("sheetname" => $sheet,"row" => $row, "col" => $col, "data" => utf8_decode($GLOBALS['TL_LANG']['tl_member_fees']['status'][0]), "bgcolor" => "#C0C0C0", "color" => "#000000", "fontweight" => XLSFONT_BOLD));
 			$col++;
@@ -92,7 +92,7 @@ class Membership extends Backend
 				$col++;
 				$xls->setcell(array("sheetname" => $sheet,"row" => $row, "col" => $col, "data" => $data['fee'], "type" => CELL_FLOAT));
 				$col++;
-				$xls->setcell(array("sheetname" => $sheet,"row" => $row, "col" => $col, "data" => $data['already_payed'], "type" => CELL_FLOAT));
+				$xls->setcell(array("sheetname" => $sheet,"row" => $row, "col" => $col, "data" => $data['payed'], "type" => CELL_FLOAT));
 				$col++;
 				$xls->setcell(array("sheetname" => $sheet,"row" => $row, "col" => $col, "data" => utf8_decode($GLOBALS['TL_LANG']['tl_member_fees'][$data['status']])));
 			}
